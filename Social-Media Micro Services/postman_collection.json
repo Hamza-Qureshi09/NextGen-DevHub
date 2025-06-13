@@ -1,0 +1,1194 @@
+{
+	"info": {
+		"_postman_id": "bde7f7ce-2079-42b8-9e1f-2bc53ef1e6aa",
+		"name": "Microservices - social media services apis",
+		"description": "this will be my first microservices apis project.",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "28419757"
+	},
+	"item": [
+		{
+			"name": "auth_service",
+			"item": [
+				{
+					"name": "login",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    // \"username\": \"SS Marketing CEO2\",\r\n    // \"email\":\"hamzaqureshi2909@gmail.com\",\r\n    // \"password\":\"Hamza123\"\r\n    \"useremail\": \"hamzaqureshi2909@gmail.com\",\r\n    \"userpassword\": \"Hamza123\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:3000/v1/auth/login",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"v1",
+								"auth",
+								"login"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "register",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"username\": \"SS Marketing CEO2\",\r\n    // \"email\":\"hamzaqureshi2909@gmail.com\",\r\n    // \"password\":\"Hamza123\"\r\n    \"email\": \"hamzaqureshi2909@gmail.com\",\r\n    \"password\": \"Hamza123\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:3000/v1/auth/register",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"v1",
+								"auth",
+								"register"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "refresh",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Cache-Control",
+								"value": "no-cache",
+								"name": "cache-control",
+								"type": "text"
+							},
+							{
+								"key": "Postman-Token",
+								"value": "<calculated when request is sent>",
+								"name": "postman-token",
+								"type": "text"
+							},
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"name": "content-type",
+								"type": "text"
+							},
+							{
+								"key": "Content-Length",
+								"value": "<calculated when request is sent>",
+								"name": "content-length",
+								"type": "text"
+							},
+							{
+								"key": "Host",
+								"value": "<calculated when request is sent>",
+								"name": "host",
+								"type": "text"
+							},
+							{
+								"key": "User-Agent",
+								"value": "PostmanRuntime/7.39.1",
+								"name": "user-agent",
+								"type": "text"
+							},
+							{
+								"key": "Accept",
+								"value": "*/*",
+								"name": "accept",
+								"type": "text"
+							},
+							{
+								"key": "Accept-Encoding",
+								"value": "gzip, deflate, br",
+								"name": "accept-encoding",
+								"type": "text"
+							},
+							{
+								"key": "Connection",
+								"value": "keep-alive",
+								"name": "connection",
+								"type": "text"
+							},
+							{
+								"key": "Cookie",
+								"value": "rfrs=_hhq_eyJhbGciOiJIUzM4NCIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI2N2RiYThlNTQ5YjYwZDQzY2E4YjQyMDEiLCJ1c2VybmFtZSI6IkhhbXphIFF1cmVzaGkiLCJyb2xlIjoiVVNFUiIsImlhdCI6MTc0MjQ0OTMwMywiZXhwIjoxNzQzMDU0MTAzfQ.QNftUS4Q1-zM95b6xXyvJERAgXEpD6sjohk2XmRgi-TBrdRiqhb7qWQSTWyorKqK",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    // \"username\": \"SS Marketing CEO2\",\r\n    // \"email\":\"hamzaqureshi2909@gmail.com\",\r\n    // \"password\":\"Hamza123\"\r\n    \"useremail\": \"hamzaqureshi2909@gmail.com\",\r\n    \"userpassword\": \"Hamza123\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:3000/v1/auth/refresh",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"v1",
+								"auth",
+								"refresh"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "logout",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Cache-Control",
+								"value": "no-cache",
+								"name": "cache-control",
+								"type": "text"
+							},
+							{
+								"key": "Postman-Token",
+								"value": "<calculated when request is sent>",
+								"name": "postman-token",
+								"type": "text"
+							},
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"name": "content-type",
+								"type": "text"
+							},
+							{
+								"key": "Content-Length",
+								"value": "<calculated when request is sent>",
+								"name": "content-length",
+								"type": "text"
+							},
+							{
+								"key": "Host",
+								"value": "<calculated when request is sent>",
+								"name": "host",
+								"type": "text"
+							},
+							{
+								"key": "User-Agent",
+								"value": "PostmanRuntime/7.39.1",
+								"name": "user-agent",
+								"type": "text"
+							},
+							{
+								"key": "Accept",
+								"value": "*/*",
+								"name": "accept",
+								"type": "text"
+							},
+							{
+								"key": "Accept-Encoding",
+								"value": "gzip, deflate, br",
+								"name": "accept-encoding",
+								"type": "text"
+							},
+							{
+								"key": "Connection",
+								"value": "keep-alive",
+								"name": "connection",
+								"type": "text"
+							},
+							{
+								"key": "Cookie",
+								"value": "access=_hhq_eyJhbGciOiJIUzM4NCIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI2N2RiYThlNTQ5YjYwZDQzY2E4YjQyMDEiLCJ1c2VybmFtZSI6IkhhbXphIFF1cmVzaGkiLCJyb2xlIjoiVVNFUiIsImlhdCI6MTc0MjQ0OTU3NiwiZXhwIjoxNzQyNDUzMTc2fQ.Y19IlaWjx3ApARcJ0XV8mKzZ_hxjcm0TgtMTB32QoiGxjbjy18SYuB1WoUM5ungH",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    // \"username\": \"SS Marketing CEO2\",\r\n    // \"email\":\"hamzaqureshi2909@gmail.com\",\r\n    // \"password\":\"Hamza123\"\r\n    \"useremail\": \"hamzaqureshi2909@gmail.com\",\r\n    \"userpassword\": \"Hamza123\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:3000/v1/auth/logout",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"v1",
+								"auth",
+								"logout"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "myinfo",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Cache-Control",
+								"value": "no-cache",
+								"name": "cache-control",
+								"type": "text"
+							},
+							{
+								"key": "Postman-Token",
+								"value": "<calculated when request is sent>",
+								"name": "postman-token",
+								"type": "text"
+							},
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"name": "content-type",
+								"type": "text"
+							},
+							{
+								"key": "Content-Length",
+								"value": "<calculated when request is sent>",
+								"name": "content-length",
+								"type": "text"
+							},
+							{
+								"key": "Host",
+								"value": "<calculated when request is sent>",
+								"name": "host",
+								"type": "text"
+							},
+							{
+								"key": "User-Agent",
+								"value": "PostmanRuntime/7.39.1",
+								"name": "user-agent",
+								"type": "text"
+							},
+							{
+								"key": "Accept",
+								"value": "*/*",
+								"name": "accept",
+								"type": "text"
+							},
+							{
+								"key": "Accept-Encoding",
+								"value": "gzip, deflate, br",
+								"name": "accept-encoding",
+								"type": "text"
+							},
+							{
+								"key": "Connection",
+								"value": "keep-alive",
+								"name": "connection",
+								"type": "text"
+							},
+							{
+								"key": "Cookie",
+								"value": "access=_hhq_eyJhbGciOiJIUzM4NCIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI2N2U2NjVkZGFmYTc1YWNhNmJiNDg4NzAiLCJ1c2VybmFtZSI6IkhhbXphIFF1cmVzaGkiLCJyb2xlIjoiVVNFUiIsImlhdCI6MTc0MzY2MTMxNywiZXhwIjoxNzQzNjY0OTE3fQ.kuDrJcrsYHs_H5OIk0J_BhhDoQocsTRcv0XGBMnltcB42oqR34rEBV3jNPliHiE2",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    // \"username\": \"SS Marketing CEO2\",\r\n    // \"email\":\"hamzaqureshi2909@gmail.com\",\r\n    // \"password\":\"Hamza123\"\r\n    \"useremail\": \"hamzaqureshi2909@gmail.com\",\r\n    \"userpassword\": \"Hamza123\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:3000/v1/auth/me",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"v1",
+								"auth",
+								"me"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "post_service",
+			"item": [
+				{
+					"name": "create_post",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Cache-Control",
+								"value": "no-cache",
+								"name": "cache-control",
+								"type": "text"
+							},
+							{
+								"key": "Postman-Token",
+								"value": "<calculated when request is sent>",
+								"name": "postman-token",
+								"type": "text"
+							},
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"name": "content-type",
+								"type": "text"
+							},
+							{
+								"key": "Content-Length",
+								"value": "<calculated when request is sent>",
+								"name": "content-length",
+								"type": "text"
+							},
+							{
+								"key": "Host",
+								"value": "<calculated when request is sent>",
+								"name": "host",
+								"type": "text"
+							},
+							{
+								"key": "User-Agent",
+								"value": "PostmanRuntime/7.39.1",
+								"name": "user-agent",
+								"type": "text"
+							},
+							{
+								"key": "Accept",
+								"value": "*/*",
+								"name": "accept",
+								"type": "text"
+							},
+							{
+								"key": "Accept-Encoding",
+								"value": "gzip, deflate, br",
+								"name": "accept-encoding",
+								"type": "text"
+							},
+							{
+								"key": "Connection",
+								"value": "keep-alive",
+								"name": "connection",
+								"type": "text"
+							},
+							{
+								"key": "Cookie",
+								"value": "access=_hhq_eyJhbGciOiJIUzM4NCIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI2N2U2NjVkZGFmYTc1YWNhNmJiNDg4NzAiLCJ1c2VybmFtZSI6IkhhbXphIFF1cmVzaGkiLCJyb2xlIjoiVVNFUiIsImlhdCI6MTc0MzY3NjQwNSwiZXhwIjoxNzQzNjgwMDA1fQ.0BaYCk1XY3rBFHYgul_AlEN6Hnm90Xt_f2BONjVSE-fFOEp_ognP9LdzGDvWiVyb",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "// {\r\n//     // \"username\": \"SS Marketing CEO2\",\r\n//     // \"email\":\"hamzaqureshi2909@gmail.com\",\r\n//     // \"password\":\"Hamza123\"\r\n//     \"useremail\": \"hamzaqureshi2909@gmail.com\",\r\n//     \"userpassword\": \"Hamza123\"\r\n// }\r\n{\r\n    \"user\": \"67dd09193188ca1f30b09853\",\r\n    \"content\": \"this is a post new 4.2\",\r\n    \"mediaIds\": [\r\n        \"67e7a86e0707d599baeb0fd4\"\r\n    ]\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:3000/v1/posts/create-post",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"v1",
+								"posts",
+								"create-post"
+							],
+							"query": [
+								{
+									"key": "Cookie",
+									"value": "access=_hhq_eyJhbGciOiJIUzM4NCIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI2N2U2NjVkZGFmYTc1YWNhNmJiNDg4NzAiLCJ1c2VybmFtZSI6IkhhbXphIFF1cmVzaGkiLCJyb2xlIjoiVVNFUiIsImlhdCI6MTc0MzIzMDk2NywiZXhwIjoxNzQzMjM0NTY3fQ.HhEK9CSkfaT335d60r0i4fQk7VUFd_YA-8vKztVUePWT-9-zhzznk1TSJ0jBkqhb",
+									"disabled": true
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "get_post",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Cache-Control",
+								"value": "no-cache",
+								"name": "cache-control",
+								"type": "text"
+							},
+							{
+								"key": "Postman-Token",
+								"value": "<calculated when request is sent>",
+								"name": "postman-token",
+								"type": "text"
+							},
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"name": "content-type",
+								"type": "text"
+							},
+							{
+								"key": "Content-Length",
+								"value": "<calculated when request is sent>",
+								"name": "content-length",
+								"type": "text"
+							},
+							{
+								"key": "Host",
+								"value": "<calculated when request is sent>",
+								"name": "host",
+								"type": "text"
+							},
+							{
+								"key": "User-Agent",
+								"value": "PostmanRuntime/7.39.1",
+								"name": "user-agent",
+								"type": "text"
+							},
+							{
+								"key": "Accept",
+								"value": "*/*",
+								"name": "accept",
+								"type": "text"
+							},
+							{
+								"key": "Accept-Encoding",
+								"value": "gzip, deflate, br",
+								"name": "accept-encoding",
+								"type": "text"
+							},
+							{
+								"key": "Connection",
+								"value": "keep-alive",
+								"name": "connection",
+								"type": "text"
+							},
+							{
+								"key": "Cookie",
+								"value": "access=_hhq_eyJhbGciOiJIUzM4NCIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI2N2U2NjVkZGFmYTc1YWNhNmJiNDg4NzAiLCJ1c2VybmFtZSI6IkhhbXphIFF1cmVzaGkiLCJyb2xlIjoiVVNFUiIsImlhdCI6MTc0MzY3NjQwNSwiZXhwIjoxNzQzNjgwMDA1fQ.0BaYCk1XY3rBFHYgul_AlEN6Hnm90Xt_f2BONjVSE-fFOEp_ognP9LdzGDvWiVyb",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"username\": \"SS Marketing CEO2\",\r\n    // \"email\":\"hamzaqureshi2909@gmail.com\",\r\n    // \"password\":\"Hamza123\"\r\n    \"email\": \"hamzaqureshi2909@gmail.com\",\r\n    \"password\": \"Hamza123\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:3000/v1/posts/all-posts?page=1&limit=20",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"v1",
+								"posts",
+								"all-posts"
+							],
+							"query": [
+								{
+									"key": "page",
+									"value": "1"
+								},
+								{
+									"key": "limit",
+									"value": "20"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "get sinngle post",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Cache-Control",
+								"value": "no-cache",
+								"name": "cache-control",
+								"type": "text"
+							},
+							{
+								"key": "Postman-Token",
+								"value": "<calculated when request is sent>",
+								"name": "postman-token",
+								"type": "text"
+							},
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"name": "content-type",
+								"type": "text"
+							},
+							{
+								"key": "Content-Length",
+								"value": "<calculated when request is sent>",
+								"name": "content-length",
+								"type": "text"
+							},
+							{
+								"key": "Host",
+								"value": "<calculated when request is sent>",
+								"name": "host",
+								"type": "text"
+							},
+							{
+								"key": "User-Agent",
+								"value": "PostmanRuntime/7.39.1",
+								"name": "user-agent",
+								"type": "text"
+							},
+							{
+								"key": "Accept",
+								"value": "*/*",
+								"name": "accept",
+								"type": "text"
+							},
+							{
+								"key": "Accept-Encoding",
+								"value": "gzip, deflate, br",
+								"name": "accept-encoding",
+								"type": "text"
+							},
+							{
+								"key": "Connection",
+								"value": "keep-alive",
+								"name": "connection",
+								"type": "text"
+							},
+							{
+								"key": "Cookie",
+								"value": "access=_hhq_eyJhbGciOiJIUzM4NCIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI2N2U2NjVkZGFmYTc1YWNhNmJiNDg4NzAiLCJ1c2VybmFtZSI6IkhhbXphIFF1cmVzaGkiLCJyb2xlIjoiVVNFUiIsImlhdCI6MTc0MzY3NjQwNSwiZXhwIjoxNzQzNjgwMDA1fQ.0BaYCk1XY3rBFHYgul_AlEN6Hnm90Xt_f2BONjVSE-fFOEp_ognP9LdzGDvWiVyb",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"username\": \"SS Marketing CEO2\",\r\n    // \"email\":\"hamzaqureshi2909@gmail.com\",\r\n    // \"password\":\"Hamza123\"\r\n    \"email\": \"hamzaqureshi2909@gmail.com\",\r\n    \"password\": \"Hamza123\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:3000/v1/posts/post?id=67e7a743771f6738a5a783b2",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"v1",
+								"posts",
+								"post"
+							],
+							"query": [
+								{
+									"key": "id",
+									"value": "67e7a743771f6738a5a783b2"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "delete single post",
+					"request": {
+						"method": "DELETE",
+						"header": [
+							{
+								"key": "Cache-Control",
+								"value": "no-cache",
+								"name": "cache-control",
+								"type": "text"
+							},
+							{
+								"key": "Postman-Token",
+								"value": "<calculated when request is sent>",
+								"name": "postman-token",
+								"type": "text"
+							},
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"name": "content-type",
+								"type": "text"
+							},
+							{
+								"key": "Content-Length",
+								"value": "<calculated when request is sent>",
+								"name": "content-length",
+								"type": "text"
+							},
+							{
+								"key": "Host",
+								"value": "<calculated when request is sent>",
+								"name": "host",
+								"type": "text"
+							},
+							{
+								"key": "User-Agent",
+								"value": "PostmanRuntime/7.39.1",
+								"name": "user-agent",
+								"type": "text"
+							},
+							{
+								"key": "Accept",
+								"value": "*/*",
+								"name": "accept",
+								"type": "text"
+							},
+							{
+								"key": "Accept-Encoding",
+								"value": "gzip, deflate, br",
+								"name": "accept-encoding",
+								"type": "text"
+							},
+							{
+								"key": "Connection",
+								"value": "keep-alive",
+								"name": "connection",
+								"type": "text"
+							},
+							{
+								"key": "Cookie",
+								"value": "access=_hhq_eyJhbGciOiJIUzM4NCIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI2N2U2NjVkZGFmYTc1YWNhNmJiNDg4NzAiLCJ1c2VybmFtZSI6IkhhbXphIFF1cmVzaGkiLCJyb2xlIjoiVVNFUiIsImlhdCI6MTc0MzY3NjQwNSwiZXhwIjoxNzQzNjgwMDA1fQ.0BaYCk1XY3rBFHYgul_AlEN6Hnm90Xt_f2BONjVSE-fFOEp_ognP9LdzGDvWiVyb",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": " {\r\n    \"username\": \"SS Marketing CEO2\",\r\n    // \"email\":\"hamzaqureshi2909@gmail.com\",\r\n    // \"password\":\"Hamza123\"\r\n    \"email\": \"hamzaqureshi2909@gmail.com\",\r\n    \"password\": \"Hamza123\"\r\n}\r\n",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:3000/v1/posts/post?id=67e7a743771f6738a5a783b3",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"v1",
+								"posts",
+								"post"
+							],
+							"query": [
+								{
+									"key": "id",
+									"value": "67e7a743771f6738a5a783b3"
+								}
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "media service",
+			"item": [
+				{
+					"name": "create media",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Cache-Control",
+								"value": "no-cache",
+								"name": "cache-control",
+								"type": "text"
+							},
+							{
+								"key": "Postman-Token",
+								"value": "<calculated when request is sent>",
+								"name": "postman-token",
+								"type": "text"
+							},
+							{
+								"key": "Content-Type",
+								"value": "multipart/form-data; boundary=<calculated when request is sent>",
+								"name": "content-type",
+								"type": "text"
+							},
+							{
+								"key": "Content-Length",
+								"value": "<calculated when request is sent>",
+								"name": "content-length",
+								"type": "text"
+							},
+							{
+								"key": "Host",
+								"value": "<calculated when request is sent>",
+								"name": "host",
+								"type": "text"
+							},
+							{
+								"key": "User-Agent",
+								"value": "PostmanRuntime/7.39.1",
+								"name": "user-agent",
+								"type": "text"
+							},
+							{
+								"key": "Accept",
+								"value": "*/*",
+								"name": "accept",
+								"type": "text"
+							},
+							{
+								"key": "Accept-Encoding",
+								"value": "gzip, deflate, br",
+								"name": "accept-encoding",
+								"type": "text"
+							},
+							{
+								"key": "Connection",
+								"value": "keep-alive",
+								"name": "connection",
+								"type": "text"
+							},
+							{
+								"key": "Cookie",
+								"value": "access=_hhq_eyJhbGciOiJIUzM4NCIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI2N2U2NjVkZGFmYTc1YWNhNmJiNDg4NzAiLCJ1c2VybmFtZSI6IkhhbXphIFF1cmVzaGkiLCJyb2xlIjoiVVNFUiIsImlhdCI6MTc0MzIzNDc5NSwiZXhwIjoxNzQzMjM4Mzk1fQ.bgnkOTL6lUPEJOJ6lmxft0JveKvym7h00fsHUO4r75FUjfHEbt6Yn4Js-E1qbA3B",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "files",
+									"type": "file",
+									"src": [
+										"d:\\Hamza Qureshi\\Hamza Images Logos\\hamza qureshi.jpg",
+										"d:\\Hamza Qureshi\\Hamza Images Logos\\hamza.jpg",
+										"d:\\Hamza Qureshi\\Hamza Images Logos\\hamza2.jpg",
+										"d:\\Hamza Qureshi\\Hamza Images Logos\\hamza4.jpg"
+									]
+								},
+								{
+									"key": "user",
+									"value": "67dd09193188ca1f30b09853",
+									"type": "text"
+								},
+								{
+									"key": "content",
+									"value": "abc",
+									"type": "text"
+								},
+								{
+									"key": "",
+									"value": "",
+									"type": "text",
+									"disabled": true
+								}
+							],
+							"options": {
+								"formdata": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:3000/v1/media/upload",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"v1",
+								"media",
+								"upload"
+							],
+							"query": [
+								{
+									"key": "Cookie",
+									"value": "",
+									"disabled": true
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "get media",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Cache-Control",
+								"value": "no-cache",
+								"name": "cache-control",
+								"type": "text"
+							},
+							{
+								"key": "Postman-Token",
+								"value": "<calculated when request is sent>",
+								"name": "postman-token",
+								"type": "text"
+							},
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"name": "content-type",
+								"type": "text"
+							},
+							{
+								"key": "Content-Length",
+								"value": "<calculated when request is sent>",
+								"name": "content-length",
+								"type": "text"
+							},
+							{
+								"key": "Host",
+								"value": "<calculated when request is sent>",
+								"name": "host",
+								"type": "text"
+							},
+							{
+								"key": "User-Agent",
+								"value": "PostmanRuntime/7.39.1",
+								"name": "user-agent",
+								"type": "text"
+							},
+							{
+								"key": "Accept",
+								"value": "*/*",
+								"name": "accept",
+								"type": "text"
+							},
+							{
+								"key": "Accept-Encoding",
+								"value": "gzip, deflate, br",
+								"name": "accept-encoding",
+								"type": "text"
+							},
+							{
+								"key": "Connection",
+								"value": "keep-alive",
+								"name": "connection",
+								"type": "text"
+							},
+							{
+								"key": "Cookie",
+								"value": "access=_hhq_eyJhbGciOiJIUzM4NCIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI2N2RkMDkxOTMxODhjYTFmMzBiMDk4NTMiLCJ1c2VybmFtZSI6IkhhbXphIFF1cmVzaGkiLCJyb2xlIjoiVVNFUiIsImlhdCI6MTc0MzEzOTQxNSwiZXhwIjoxNzQzMTQzMDE1fQ.9pwUZnm2om-s0_B7t4pmWJPrcq3JtLBhBcVPMiorjybbNIZcSji4jeoQ8VHjSA8i",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"username\": \"SS Marketing CEO2\",\r\n    // \"email\":\"hamzaqureshi2909@gmail.com\",\r\n    // \"password\":\"Hamza123\"\r\n    \"email\": \"hamzaqureshi2909@gmail.com\",\r\n    \"password\": \"Hamza123\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:3000/v1/media/get-media",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"v1",
+								"media",
+								"get-media"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "search_service",
+			"item": [
+				{
+					"name": "create media",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Cache-Control",
+								"value": "no-cache",
+								"name": "cache-control",
+								"type": "text"
+							},
+							{
+								"key": "Postman-Token",
+								"value": "<calculated when request is sent>",
+								"name": "postman-token",
+								"type": "text"
+							},
+							{
+								"key": "Content-Type",
+								"value": "multipart/form-data; boundary=<calculated when request is sent>",
+								"name": "content-type",
+								"type": "text"
+							},
+							{
+								"key": "Content-Length",
+								"value": "<calculated when request is sent>",
+								"name": "content-length",
+								"type": "text"
+							},
+							{
+								"key": "Host",
+								"value": "<calculated when request is sent>",
+								"name": "host",
+								"type": "text"
+							},
+							{
+								"key": "User-Agent",
+								"value": "PostmanRuntime/7.39.1",
+								"name": "user-agent",
+								"type": "text"
+							},
+							{
+								"key": "Accept",
+								"value": "*/*",
+								"name": "accept",
+								"type": "text"
+							},
+							{
+								"key": "Accept-Encoding",
+								"value": "gzip, deflate, br",
+								"name": "accept-encoding",
+								"type": "text"
+							},
+							{
+								"key": "Connection",
+								"value": "keep-alive",
+								"name": "connection",
+								"type": "text"
+							},
+							{
+								"key": "Cookie",
+								"value": "access=_hhq_eyJhbGciOiJIUzM4NCIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI2N2RkMDkxOTMxODhjYTFmMzBiMDk4NTMiLCJ1c2VybmFtZSI6IkhhbXphIFF1cmVzaGkiLCJyb2xlIjoiVVNFUiIsImlhdCI6MTc0Mjk3NTkyNSwiZXhwIjoxNzQyOTc5NTI1fQ.RsNSnLQapWlf5yBDXxMa0b0kxhxJ-5W2NIL3a6fx4CbJAlXPFFnrMaYuOLSilxOb",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "files",
+									"type": "file",
+									"src": [
+										"d:\\Hamza Qureshi\\Hamza Images Logos\\codinghawks_society mnsuam.jpg",
+										"d:\\Hamza Qureshi\\Hamza Images Logos\\hamza qureshi.jpg",
+										"d:\\Hamza Qureshi\\Hamza Images Logos\\hamza.jpg",
+										"d:\\Hamza Qureshi\\Hamza Images Logos\\hamza2.jpg",
+										"d:\\Hamza Qureshi\\Hamza Images Logos\\hamza4.jpg"
+									]
+								},
+								{
+									"key": "user",
+									"value": "67dd09193188ca1f30b09853",
+									"type": "text"
+								},
+								{
+									"key": "content",
+									"value": "abc",
+									"type": "text"
+								},
+								{
+									"key": "",
+									"value": "",
+									"type": "text",
+									"disabled": true
+								}
+							],
+							"options": {
+								"formdata": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:3000/v1/media/upload",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"v1",
+								"media",
+								"upload"
+							],
+							"query": [
+								{
+									"key": "Cookie",
+									"value": "",
+									"disabled": true
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "get media",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Cache-Control",
+								"value": "no-cache",
+								"name": "cache-control",
+								"type": "text"
+							},
+							{
+								"key": "Postman-Token",
+								"value": "<calculated when request is sent>",
+								"name": "postman-token",
+								"type": "text"
+							},
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"name": "content-type",
+								"type": "text"
+							},
+							{
+								"key": "Content-Length",
+								"value": "<calculated when request is sent>",
+								"name": "content-length",
+								"type": "text"
+							},
+							{
+								"key": "Host",
+								"value": "<calculated when request is sent>",
+								"name": "host",
+								"type": "text"
+							},
+							{
+								"key": "User-Agent",
+								"value": "PostmanRuntime/7.39.1",
+								"name": "user-agent",
+								"type": "text"
+							},
+							{
+								"key": "Accept",
+								"value": "*/*",
+								"name": "accept",
+								"type": "text"
+							},
+							{
+								"key": "Accept-Encoding",
+								"value": "gzip, deflate, br",
+								"name": "accept-encoding",
+								"type": "text"
+							},
+							{
+								"key": "Connection",
+								"value": "keep-alive",
+								"name": "connection",
+								"type": "text"
+							},
+							{
+								"key": "Cookie",
+								"value": "access=_hhq_eyJhbGciOiJIUzM4NCIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI2N2RkMDkxOTMxODhjYTFmMzBiMDk4NTMiLCJ1c2VybmFtZSI6IkhhbXphIFF1cmVzaGkiLCJyb2xlIjoiVVNFUiIsImlhdCI6MTc0MzEzOTQxNSwiZXhwIjoxNzQzMTQzMDE1fQ.9pwUZnm2om-s0_B7t4pmWJPrcq3JtLBhBcVPMiorjybbNIZcSji4jeoQ8VHjSA8i",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"username\": \"SS Marketing CEO2\",\r\n    // \"email\":\"hamzaqureshi2909@gmail.com\",\r\n    // \"password\":\"Hamza123\"\r\n    \"email\": \"hamzaqureshi2909@gmail.com\",\r\n    \"password\": \"Hamza123\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:3000/v1/media/get-media",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"v1",
+								"media",
+								"get-media"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		}
+	]
+}

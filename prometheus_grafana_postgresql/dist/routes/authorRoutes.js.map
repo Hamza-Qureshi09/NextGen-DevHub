@@ -1,0 +1,1 @@
+{"version":3,"file":"authorRoutes.js","sourceRoot":"","sources":["../../src/routes/authorRoutes.ts"],"names":[],"mappings":";;;AAAA,qCAAiC;AACjC,sEAGyC;AAEzC,MAAM,MAAM,GAAG,IAAA,gBAAM,GAAE,CAAC;AAExB,MAAM,CAAC,IAAI,CAAC,aAAa,EAAE,sCAAmB,CAAC,CAAC;AAChD,MAAM,CAAC,MAAM,CAAC,aAAa,EAAE,yCAAsB,CAAC,CAAC;AAErD,MAAM,YAAY,GAAG,MAAM,CAAC;AACnB,oCAAY"}

@@ -1,0 +1,14 @@
+{
+  "policies": [
+    {
+      "effect": "allow",
+      "conditions": {
+        "user.department": "HR",
+        "resource.department": "HR",
+        "action": "read",
+        "resource.type": "document",
+        "environment.time": { "gte": "09:00", "lte": "17:00" }
+      }
+    }
+  ]
+}

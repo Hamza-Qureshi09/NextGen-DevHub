@@ -1,0 +1,14 @@
+{
+  "policies": [
+    {
+      "id": "policy1",
+      "effect": "allow",
+      "user": "Alice",
+      "action": "read",
+      "resource": "doc1",
+      "conditions": {
+        "department": "HR"
+      }
+    }
+  ]
+}

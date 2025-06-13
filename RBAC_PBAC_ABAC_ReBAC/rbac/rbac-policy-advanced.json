@@ -1,0 +1,16 @@
+{
+  "roles": {
+    "SuperAdmin": ["read", "write", "update", "delete"],
+    "Admin": ["read", "write", "update"],
+    "Editor": ["read", "write"],
+    "SeniorEditor": ["delete", { "inherit": "Editor" }],
+    "Viewer": ["read"]
+  },
+  "users": {
+    "Hamza1": ["SuperAdmin"],
+    "Hamza": ["Admin"],
+    "Charlie": ["Editor"],
+    "Alice": ["SeniorEditor", "Viewer"],
+    "Bob": ["Viewer"]
+  }
+}

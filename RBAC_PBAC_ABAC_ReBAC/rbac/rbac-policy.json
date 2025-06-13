@@ -1,0 +1,13 @@
+{
+  "roles": {
+    "Admin": ["read", "write", "update", "delete"],
+    "Editor": ["read", "write"],
+    "Viewer": ["read"]
+  },
+
+  "users": {
+    "Hamza": ["Admin"],
+    "Alice": ["Editor"],
+    "Bob": ["Viewer"]
+  }
+}

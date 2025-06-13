@@ -1,0 +1,20 @@
+{
+  "permissions": [
+    {
+      "user": "Alice",
+      "resource": "doc*",
+      "actions": ["read", "update", "delete"],
+      "conditions": {
+        "time": {
+          "gte": "09:00",
+          "lte": "17:00"
+        }
+      }
+    },
+    {
+      "user": "Bob",
+      "resource": "doc2",
+      "actions": ["write"]
+    }
+  ]
+}

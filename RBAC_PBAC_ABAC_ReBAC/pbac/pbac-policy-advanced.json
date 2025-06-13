@@ -1,0 +1,23 @@
+{
+  "policies": [
+    {
+      "id": "policy1",
+      "effect": "deny",
+      "user": "*",
+      "action": "delete",
+      "resource": "doc*",
+      "priority": 1
+    },
+    {
+      "id": "policy2",
+      "effect": "allow",
+      "user": "Alice",
+      "action": "read",
+      "resource": "doc1",
+      "conditions": {
+        "department": "HR"
+      },
+      "priority": 2
+    }
+  ]
+}

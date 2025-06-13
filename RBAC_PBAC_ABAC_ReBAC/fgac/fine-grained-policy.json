@@ -1,0 +1,19 @@
+{
+  "permissions": [
+    {
+      "user": "Alice",
+      "resource": "doc1",
+      "actions": ["read"]
+    },
+    {
+      "user": "Bob",
+      "resource": "doc2",
+      "actions": ["write"]
+    },
+    {
+      "user": "Hamza",
+      "resource": "doc*",
+      "actions": ["write", "update"]
+    }
+  ]
+}

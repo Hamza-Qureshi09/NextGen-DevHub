@@ -1,0 +1,89 @@
+services:
+  database:
+    image: postgres:16
+    container_name: postgres_db
+    restart: always
+    ports:
+      - 5555:5432
+    environment:
+      - POSTGRES_USER=hamza
+      - POSTGRES_PASSWORD=hamza123
+      - POSTGRES_DB=prisma_pg
+    volumes:
+      - my_pg_with_prisma_app_data:/var/lib/postgresql/data
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U hamza"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+    networks:
+      - hq-network
+
+  pgadmin:
+    image: dpage/pgadmin4
+    container_name: pgadmin_dashboard
+    restart: always
+    ports:
+      - 5050:80
+    environment:
+      - PGADMIN_DEFAULT_EMAIL=hamza@gmail.com
+      - PGADMIN_DEFAULT_PASSWORD=hamza123
+    networks:
+      - hq-network
+    depends_on:
+      - database
+
+  backend:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: pg_prisma_api
+    restart: always
+    depends_on:
+      database:
+        condition: service_healthy
+    ports:
+      - 6002:6002
+    env_file:
+      - ./.env
+    networks:
+      - hq-network
+
+  prometheus:
+    image: prom/prometheus:latest
+    container_name: prometheus
+    restart: always
+    volumes:
+      - ./prometheus.yml:/etc/prometheus/prometheus.yml
+    ports:
+      - 9090:9090
+    networks:
+      - hq-network
+    depends_on:
+      backend:
+        condition: service_healthy
+
+  grafana:
+    image: grafana/grafana:latest
+    container_name: grafana
+    restart: always
+    ports:
+      - 3002:3000
+    volumes:
+      - grafana_data:/var/lib/grafana
+    environment:
+      - GF_SECURITY_ADMIN_USER=admin #admin@gmail.com email for signup
+      - GF_SECURITY_ADMIN_PASSWORD=admin #hamza123 changed psw
+      - GF_USERS_ALLOW_SIGN_UP=false
+    networks:
+      - hq-network
+    depends_on:
+      - prometheus
+
+volumes:
+  my_pg_with_prisma_app_data:
+  grafana_data:
+
+networks:
+  hq-network:
+    driver: bridge

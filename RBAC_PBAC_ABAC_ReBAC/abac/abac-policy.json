@@ -1,0 +1,12 @@
+{
+  "policies": [
+    {
+      "effect": "allow",
+      "conditions": {
+        "user.department": "HR",
+        "resource.department": "HR",
+        "action": "read"
+      }
+    }
+  ]
+}
