@@ -8,8 +8,13 @@ import {
 } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
+import { Metadata } from "next";
 
-export default function Home() {
+export const metadata: Metadata = {
+  title: "Theme",
+};
+
+export default function Theme() {
   return (
     <main className="min-h-screen bg-background">
       <div className="container mx-auto px-4 py-8">

@@ -1,12 +1,11 @@
 "use client";
 
-import type React from "react";
-
 import { Provider } from "react-redux";
 import { store } from "@/store/store";
-import { ThemeProvider } from "@/providers/theme-provider";
+import { ThemeProvider } from "@/providers/ThemeProvider";
+import { ReactNode } from "react";
 
-export function Providers({ children }: { children: React.ReactNode }) {
+export function ReduxProvider({ children }: { children: ReactNode }) {
   return (
     <Provider store={store}>
       <ThemeProvider>{children}</ThemeProvider>

@@ -1,0 +1,491 @@
+this is my final code ok
+import React from "react";
+import { Metadata } from "next";
+import { Suspense } from "react";
+import { HydrationBoundary, dehydrate } from "@tanstack/react-query";
+import { fetchPosts } from "@/server/actions";
+import { getQueryClient } from "@/lib/query-client";
+import { PostForm } from "@/components/posts/PostForm";
+import { PostFilter } from "@/components/posts/PostFilter";
+import { PostList } from "@/components/posts/PostList";
+import { Pagination } from "@/components/posts/Pagination";
+
+export const metadata: Metadata = {
+  title: "Posts with Pagination and Filtering",
+  description:
+    "Paginated and filtered list of posts with server-side prefetching",
+};
+
+export default async function PostsPage({
+  searchParams,
+}: {
+  searchParams: {
+    page?: string;
+    pageSize?: string;
+    category?: string;
+    status?: string;
+    search?: string;
+  };
+}) {
+  const searchParamsUsage = await searchParams;
+  const queryClient = getQueryClient();
+  const filters = {
+    page: parseInt(searchParamsUsage.page || "1"),
+    pageSize: parseInt(searchParamsUsage.pageSize || "10"),
+    category: searchParamsUsage.category || "",
+    status: searchParamsUsage.status || "",
+    search: searchParamsUsage.search || "",
+  };
+
+  await queryClient.prefetchQuery({
+    queryKey: ["posts", filters],
+    queryFn: () => fetchPosts(filters),
+  });
+
+  const { posts, totalPages } = await fetchPosts(filters);
+
+  return (
+    <HydrationBoundary state={dehydrate(queryClient)}>
+      <div className="container mx-auto py-10 px-10 ">
+        <h1 className="text-3xl font-bold mb-4">
+          Posts with Pagination and Filtering
+        </h1>
+        <PostForm />
+        <PostFilter />
+        <Suspense fallback={<div>Loading Posts... </div>}>
+          <PostList posts={posts} />
+        </Suspense>
+        <Pagination totalPages={totalPages} currentPage={filters.page} />
+      </div>
+    </HydrationBoundary>
+  );
+}
+"use client";
+
+import { useRouter, useSearchParams } from "next/navigation";
+import { Button } from "../ui/button";
+import {
+  Pagination as ShadcnPagination,
+  PaginationContent,
+  PaginationEllipsis,
+  PaginationItem,
+  PaginationLink,
+  PaginationNext,
+  PaginationPrevious,
+} from "@/components/ui/pagination";
+
+export function Pagination({
+  totalPages,
+  currentPage,
+}: {
+  totalPages: number;
+  currentPage: number;
+}) {
+  const router = useRouter();
+  const searchParams = useSearchParams();
+
+  const handlePageChange = (page: number) => {
+    const params = new URLSearchParams(searchParams.toString());
+    params.set("page", page.toString());
+    router.push(`?${params.toString()}`);
+  };
+
+  // Generate page numbers with ellipsis for large page counts
+  const getPageNumbers = () => {
+    const maxPagesToShow = 5; // Show up to 5 page numbers at a time
+    const pages: (number | "ellipsis")[] = [];
+
+    if (totalPages <= maxPagesToShow) {
+      // Show all pages if totalPages is small
+      return Array.from({ length: totalPages }, (_, i) => i + 1);
+    }
+
+    const startPage = Math.max(1, currentPage - 2);
+    const endPage = Math.min(totalPages, startPage + maxPagesToShow - 1);
+
+    // Add first page and ellipsis if needed
+    if (startPage > 1) {
+      pages.push(1);
+      if (startPage > 2) pages.push("ellipsis");
+    }
+
+    // Add visible page numbers
+    for (let i = startPage; i <= endPage; i++) {
+      pages.push(i);
+    }
+
+    // Add last page and ellipsis if needed
+    if (endPage < totalPages) {
+      if (endPage < totalPages - 1) pages.push("ellipsis");
+      pages.push(totalPages);
+    }
+
+    return pages;
+  };
+
+  return (
+    <ShadcnPagination className="mt-4">
+      <PaginationContent>
+        <PaginationItem>
+          <PaginationPrevious
+            onClick={() => currentPage > 1 && handlePageChange(currentPage - 1)}
+            className={
+              currentPage === 1
+                ? "pointer-events-none opacity-50"
+                : "cursor-pointer"
+            }
+          />
+        </PaginationItem>
+        {getPageNumbers().map((page, index) =>
+          page === "ellipsis" ? (
+            <PaginationItem key={`ellipsis-${index}`}>
+              <PaginationEllipsis />
+            </PaginationItem>
+          ) : (
+            <PaginationItem key={page}>
+              <PaginationLink
+                isActive={currentPage === page}
+                onClick={() => handlePageChange(page as number)}
+                className="cursor-pointer"
+              >
+                {page}
+              </PaginationLink>
+            </PaginationItem>
+          )
+        )}
+        <PaginationItem>
+          <PaginationNext
+            onClick={() =>
+              currentPage < totalPages && handlePageChange(currentPage + 1)
+            }
+            className={
+              currentPage === totalPages
+                ? "pointer-events-none opacity-50"
+                : "cursor-pointer"
+            }
+          />
+        </PaginationItem>
+      </PaginationContent>
+    </ShadcnPagination>
+  );
+}
+"use client";
+
+import { useRouter, useSearchParams } from "next/navigation";
+import { useState } from "react";
+
+export function PostFilter() {
+  const router = useRouter();
+  const searchParams = useSearchParams();
+  const [filters, setFilters] = useState({
+    category: searchParams.get("category") || "",
+    status: searchParams.get("status") || "",
+    search: searchParams.get("search") || "",
+  });
+
+  const handleFilterChange = (name: string, value: string) => {
+    const newFilters = { ...filters, [name]: value };
+    setFilters(newFilters);
+    const params = new URLSearchParams(searchParams.toString());
+    if (value) {
+      params.set(name, value);
+    } else {
+      params.delete(name);
+    }
+    params.set("page", "1"); // Reset to page 1 on filter change
+    router.push(`?${params.toString()}`);
+  };
+
+  return (
+    <div className="flex gap-4 mb-4">
+      <select
+        value={filters.category}
+        onChange={(e) => handleFilterChange("category", e.target.value)}
+        className="border p-2 rounded"
+      >
+        <option value="">All Categories</option>
+        <option value="tech">Tech</option>
+        <option value="lifestyle">Lifestyle</option>
+        <option value="education">Education</option>
+      </select>
+      <select
+        value={filters.status}
+        onChange={(e) => handleFilterChange("status", e.target.value)}
+        className="border p-2 rounded"
+      >
+        <option value="">All Statuses</option>
+        <option value="published">Published</option>
+        <option value="draft">Draft</option>
+      </select>
+      <input
+        type="text"
+        value={filters.search}
+        onChange={(e) => handleFilterChange("search", e.target.value)}
+        placeholder="Search posts..."
+        className="border p-2 rounded"
+      />
+    </div>
+  );
+}
+"use client";
+
+import { useForm } from "react-hook-form";
+import { zodResolver } from "@hookform/resolvers/zod";
+import { z } from "zod";
+import { useMutation } from "@tanstack/react-query";
+import { createPost, updatePost } from "@/server/actions";
+import { Post } from "@/types/general";
+import { getQueryClient } from "@/lib/query-client";
+
+const postSchema = z.object({
+  id: z.string().optional(),
+  title: z.string().min(2),
+  content: z.string().min(10),
+  author: z.string().min(2),
+  category: z.enum(["tech", "lifestyle", "education"]),
+  status: z.enum(["draft", "published"]),
+});
+
+export function PostForm({ initialData }: { initialData?: Post }) {
+  const queryClient = getQueryClient();
+  const {
+    register,
+    handleSubmit,
+    formState: { errors },
+    reset,
+  } = useForm({
+    resolver: zodResolver(postSchema),
+    defaultValues: initialData || {
+      title: "",
+      content: "",
+      author: "",
+      category: "tech",
+      status: "draft",
+    },
+  });
+
+  const createMutation = useMutation({
+    mutationFn: createPost,
+    onMutate: async (newPost) => {
+      await queryClient.cancelQueries({ queryKey: ["posts"] });
+      const previousPosts = queryClient.getQueryData<Post[]>(["posts"]) || [];
+      queryClient.setQueryData(
+        ["posts"],
+        [
+          {
+            id: `post-${Date.now()}`,
+            ...newPost,
+            createdAt: new Date().toISOString(),
+          },
+          ...previousPosts,
+        ]
+      );
+      return { previousPosts };
+    },
+    onError: (err, newPost, context) => {
+      queryClient.setQueryData(["posts"], context?.previousPosts);
+    },
+    onSuccess: () => {
+      queryClient.invalidateQueries({ queryKey: ["posts"] });
+      reset();
+    },
+  });
+
+  const updateMutation = useMutation({
+    mutationFn: ({
+      id,
+      data,
+    }: {
+      id: string;
+      data: Partial<Omit<Post, "id" | "createdAt">>;
+    }) => updatePost(id, data),
+    onMutate: async ({ id, data }) => {
+      await queryClient.cancelQueries({ queryKey: ["posts"] });
+      const previousPosts = queryClient.getQueryData<Post[]>(["posts"]) || [];
+      queryClient.setQueryData(
+        ["posts"],
+        previousPosts.map((post) =>
+          post.id === id
+            ? { ...post, ...data, createdAt: new Date().toISOString() }
+            : post
+        )
+      );
+      return { previousPosts };
+    },
+    onError: (err, newPost, context) => {
+      queryClient.setQueryData(["posts"], context?.previousPosts);
+    },
+    onSuccess: () => {
+      queryClient.invalidateQueries({ queryKey: ["posts"] });
+      reset();
+    },
+  });
+
+  const onSubmit = handleSubmit((data) => {
+    if (data.id) {
+      updateMutation.mutate({
+        id: data.id,
+        data: {
+          title: data.title,
+          content: data.content,
+          author: data.author,
+          category: data.category,
+          status: data.status,
+        },
+      });
+    } else {
+      createMutation.mutate({
+        title: data.title,
+        content: data.content,
+        author: data.author,
+        category: data.category,
+        status: data.status,
+      });
+    }
+  });
+
+  return (
+    <form onSubmit={onSubmit} className="space-y-4">
+      <div>
+        <input
+          {...register("title")}
+          placeholder="Title"
+          className="border p-2 w-full rounded"
+        />
+        {errors.title && <p className="text-red-500">{errors.title.message}</p>}
+      </div>
+      <div>
+        <textarea
+          {...register("content")}
+          placeholder="Content"
+          className="border p-2 w-full rounded"
+        />
+        {errors.content && (
+          <p className="text-red-500">{errors.content.message}</p>
+        )}
+      </div>
+      <div>
+        <input
+          {...register("author")}
+          placeholder="Author"
+          className="border p-2 w-full rounded"
+        />
+        {errors.author && (
+          <p className="text-red-500">{errors.author.message}</p>
+        )}
+      </div>
+      <div>
+        <select {...register("category")} className="border p-2 w-full rounded">
+          <option value="tech">Tech</option>
+          <option value="lifestyle">Lifestyle</option>
+          <option value="education">Education</option>
+        </select>
+        {errors.category && (
+          <p className="text-red-500">{errors.category.message}</p>
+        )}
+      </div>
+      <div>
+        <select {...register("status")} className="border p-2 w-full rounded">
+          <option value="published">Published</option>
+          <option value="draft">Draft</option>
+        </select>
+        {errors.status && (
+          <p className="text-red-500">{errors.status.message}</p>
+        )}
+      </div>
+      <button
+        type="submit"
+        className="bg-blue-500 text-white px-4 py-2 rounded"
+      >
+        {initialData ? "Update" : "Submit"}
+      </button>
+    </form>
+  );
+}
+
+"use client";
+
+import { Post } from "@/types/general";
+
+export function PostList({ posts }: { posts: Post[] }) {
+  return (
+    <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
+      {posts.map((post) => (
+        <div key={post.id} className="border p-4 rounded">
+          <h2 className="text-xl font-bold">{post.title}</h2>
+          <p className="text-gray-600">{post.content}</p>
+          <p className="text-sm">
+            By {post.author} | {post.category} | {post.status}
+          </p>
+        </div>
+      ))}
+    </div>
+  );
+}
+
+
+
+
+
+
+
+
+import { QueryClient } from "@tanstack/react-query";
+import { cache } from "react";
+
+// using `cache` to create a singleton QueryClient, preventing re-instantiation on re-renders or across server/client boundaries.
+export const getQueryClient = cache(
+    () =>
+        new QueryClient({
+            //   defaultOptions: {
+            //     queries: {
+            //       staleTime: 60 * 1000, // 1 minute
+            //       gcTime: 5 * 60 * 1000, // 5 minutes
+            //       retry: 1,
+            //       refetchOnWindowFocus: false,
+            //     },
+            //   },
+        })
+);
+
+
+import "@/styles/globals.css";
+import { ReduxProvider } from "@/providers/ReduxProviders";
+import { Suspense } from "react";
+import { Toaster } from "sonner";
+import { Metadata } from "next";
+import { TanStackQueryProvider } from "@/providers/QueryProvider";
+import { RootLoading } from "@/components/shared/loaders/RootLoader";
+
+export const metadata: Metadata = {
+  title: "Create Next App",
+  description: "Generated by create next app",
+};
+
+export default function RootLayout({
+  children,
+}: Readonly<{
+  children: React.ReactNode;
+}>) {
+  return (
+    <html lang="en" suppressHydrationWarning>
+      <body className={`antialiased`}>
+        {/* providers */}
+        <ReduxProvider>
+          {/* suspense boundary */}
+          <Suspense fallback={<RootLoading />}>
+            <TanStackQueryProvider>{children}</TanStackQueryProvider>
+          </Suspense>
+        </ReduxProvider>
+        {/* toaster */}
+        <Toaster
+          position="top-right"
+          richColors
+          closeButton
+          duration={3000}
+          theme="system"
+        />
+      </body>
+    </html>
+  );
+}

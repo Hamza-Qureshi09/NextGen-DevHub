@@ -1,14 +1,8 @@
 import Image from "next/image";
-import { Metadata } from "next";
-
-export const metadata: Metadata = {
-  title: "Go-To Template",
-  description: "created by hamza qureshi",
-};
 
 export default function Home() {
   return (
-    <div className=" grid grid-rows-[20px_1fr_20px] items-center justify-items-center min-h-screen p-8 pb-20 gap-16 sm:p-20 font-[family-name:var(--font-geist-sans)]">
+    <div className="grid grid-rows-[20px_1fr_20px] items-center justify-items-center min-h-screen p-8 pb-20 gap-16 sm:p-20 font-[family-name:var(--font-geist-sans)]">
       <main className="flex flex-col gap-[32px] row-start-2 items-center sm:items-start">
         <Image
           className="dark:invert"
@@ -22,11 +16,11 @@ export default function Home() {
           <li className="mb-2 tracking-[-.01em]">
             Get started by editing{" "}
             <code className="bg-black/[.05] dark:bg-white/[.06] px-1 py-0.5 rounded font-[family-name:var(--font-geist-mono)] font-semibold">
-              src/app/page.tsx
+              src/app/page.js
             </code>
             .
           </li>
-          <li className="tracking-[-.01em]">
+          <li className="tracking-[-.01em] text-cyan-400">
             Save and see your changes instantly.
           </li>
         </ol>
@@ -48,7 +42,7 @@ export default function Home() {
             Deploy now
           </a>
           <a
-            className="rounded-full border border-solid border-black/[.08] dark:border-white/[.145] transition-colors flex items-center justify-center hover:bg-[#f2f2f2] dark:hover:bg-[#1a1a1a] hover:border-transparent font-medium text-sm sm:text-base h-10 sm:h-12 px-4 sm:px-5 w-full sm:w-auto md:w-[158px] font-Nunito"
+            className="rounded-full border border-solid border-black/[.08] dark:border-white/[.145] transition-colors flex items-center justify-center hover:bg-[#f2f2f2] dark:hover:bg-[#1a1a1a] hover:border-transparent font-medium text-sm sm:text-base h-10 sm:h-12 px-4 sm:px-5 w-full sm:w-auto md:w-[158px]"
             href="https://nextjs.org/docs?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
             target="_blank"
             rel="noopener noreferrer"
@@ -107,88 +101,3 @@ export default function Home() {
     </div>
   );
 }
-
-// import Image from "next/image";
-// import { Metadata } from "next";
-// import dynamic from "next/dynamic";
-// import MainPage from "@/components/MainPage";
-// import { LeadFilters as LeadFiltersType, LeadsData } from "@/types/general";
-// import { cookies } from "next/headers";
-// import { getQueryClient } from "@/lib/query-client";
-// import { fetchActivities, fetchChats, fetchLeads } from "@/server/actions";
-
-// export const metadata: Metadata = {
-//   title: "Go-To Template",
-//   description: "created by hamza qureshi",
-// };
-
-// async function getFiltersFromSearchParams(
-//   searchParams: Partial<LeadFiltersType>
-// ): Promise<LeadFiltersType> {
-//   return {
-//     page: parseInt(String(searchParams.page) || "1", 10) || 1,
-//     pageSize: parseInt(String(searchParams.pageSize) || "10", 10) || 10,
-//     by: searchParams.by || "",
-//     value: searchParams.value || "",
-//     date: searchParams.date || "",
-//     dateRange: Array.isArray(searchParams.dateRange)
-//       ? searchParams.dateRange
-//       : [],
-//     tasksCount: searchParams.tasksCount || "",
-//     projectInterest: searchParams.projectInterest || "",
-//     country: searchParams.country || "",
-//     city: searchParams.city || "",
-//     lastAllocation: searchParams.lastAllocation || "",
-//     byTeamAndMembers: Array.isArray(searchParams.byTeamAndMembers)
-//       ? searchParams.byTeamAndMembers
-//       : [],
-//   };
-// }
-
-// export default async function Home({
-//   searchParams,
-// }: {
-//   searchParams: Promise<Partial<LeadFiltersType>>;
-// }) {
-//   const cookieStore = await cookies();
-//   const queryClient = getQueryClient();
-//   const userCookie = cookieStore.get("access");
-//   const searchParamsResolved = await searchParams;
-
-//   const initialFilters = await getFiltersFromSearchParams(searchParamsResolved);
-
-//   // fetch leads data
-//   const payload = {
-//     ...initialFilters,
-//     userId: "123",
-//   };
-
-//   // Prefetch data with error handling
-//   let initialLeads: LeadsData | null = null;
-//   let initialActivities: any[] | null = null;
-//   let initialChats: any[] | null = null;
-
-//   try {
-//     [initialLeads, initialActivities, initialChats] = await Promise.all([
-//       fetchLeads(payload),
-//       fetchActivities(payload),
-//       fetchChats(),
-//     ]);
-//   } catch (error) {
-//     console.error("Prefetching failed:", error);
-//   }
-
-//   console.info(
-//     "server side lead page render",
-//     initialLeads,
-//     initialActivities,
-//     initialChats
-//   );
-
-//   return (
-//     <div className=" grid grid-rows-[20px_1fr_20px] items-center justify-items-center min-h-screen p-8 pb-20 gap-16 sm:p-20 font-[family-name:var(--font-geist-sans)]">
-//       {/* Client component */}
-//       <MainPage initialFilters={initialFilters} />
-//     </div>
-//   );
-// }
