@@ -1,0 +1,4 @@
+{
+  "ext": ".js",
+  "ignore": ["dist", "node_modules"]
+}
