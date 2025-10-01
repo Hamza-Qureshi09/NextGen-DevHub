@@ -1,0 +1,97 @@
+
+algorithum => it is a set of instructions that we write before writting the program. so we can say algorithum is a plan to write the program.
+
+analysis of algorithum=> suppose we have one program and that program has multiple solutions now in order to decide which solution is better above all of them in terms of time,space complexity this process is called analysis of algorithum. the best solution will take less time and space to execute.
+
+
+
+asymptotic notation=> a mathematical tool used to describe the efficiency of an algorithum by analyzing the how the algorithum runtime or space requiremtns changes as the input size increases. we have 3 different notations in this 
+three different notations: 
+1. big O=> upperone, aik algorithum max kitna time lega execute hone me, 
+2. big Theta (Θ)=>averageone, aik algorithum avrg kitna time lega execute hone me.
+3. big Omega (Ω)=>lowerone, aik algorithum min kitna time lega execute hone me.
+
+
+or time complexity yha under big O ke ati hai means max time of an algorithum takes to execute
+
+1. time complexity=> konsa statement algorithum me kitni bar execute hora hai and how much time an algorithum takes to execute.
+
+example_01:
+temp=x => 1 time execution
+x=y  => 1 time execution
+y=temp  => 1 time execution
+so fn=O(3)=O(1) 
+RULE01: agr koi constant mil rha hai to osko direct one likh do.
+
+example_02:
+for(i=0;i<=n;i++){
+statement; => yha statement n times execute hogi 
+}
+so fn=O(n)=O(n)
+RULE02: loop or coditions ko ignore kro bs andr check kro statement kitni bar execute horhi hai loop ya condition me
+
+example_03:
+for(i=0;i<=n;i++){
+statement; => yha statement n times execute hogi 
+}
+for(j=0;j<=n;j++){
+statement; => yha statement n times execute hogi 
+}
+so fn=O(2n)=O(n)
+RULE03: coefficient ko ignore kro degree ko importance deni hai. or highest degree ko importance deni hai means agr n^2 or n^3 ho to ap n^3 likho gy. or yha pr filhal n ki degree 1 hai. 
+
+example_04:
+for(j=0;j<=n;j++){ => yha abhi 1st iteration hogi or nechy loop me
+for(c=0;c<=n;c++){
+statement; => yha statement n times execute hogi 
+}
+}
+means;
+1 n=> times execution
+2 n=> times execution
+3 n=> times execution
+n n=> times execution
+so fn=O(n^2)
+
+example_05:
+for(i=n;i>=1;i=i/2){
+statement; => yha statement n times execute hogi 
+}
+means n=10 so 10/2=5 in next iteration n=5 so 5/2=2.5 ... mtlb hr iteration pr value half hoti jari hai or aik point pr i ki value 1 se km hogi.
+so fn=O(log n to the base 2)=O(log n)
+
+
+
+
+
+
+practice algorithums:
+01. bubble sort: ksi bhi trah ki array ko assending order me rkhna basically
+e.g: arr=[8,5,11,6,3]
+function bubble_sort(arr, arrLength) {
+  let a, b, temp;
+  for (a = 0; a < arrLength - 1; a++) {
+    // the last element will already be sorted
+    for (b = 0; b < arrLength - 1 - a; b++) {
+      //avoid unnecessary comparisons for the last sorted elements.
+      if (arr[b] > arr[b + 1]) {
+        temp = arr[b];
+        arr[b] = arr[b + 1];
+        arr[b + 1] = temp;
+      }
+    }
+  }
+  console.info(arr);
+}
+bubble_sort(arr, arr.length);
+
+
+
+
+
+O (log n)
+function logFunc(n){
+  if(n===0) return "Done"
+  n=Math.floor(n/2)
+  return logFunc(n)
+}

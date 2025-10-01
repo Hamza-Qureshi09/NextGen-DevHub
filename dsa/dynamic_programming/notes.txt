@@ -1,0 +1,73 @@
+Let's dive into dynamic programming (DP) and understand how it can simplify solving complex problems by breaking them into manageable subproblems. Dynamic programming is especially useful for problems that involve making a series of decisions, where you can store results of previous decisions to avoid recalculating them, making your solution faster and more efficient.
+
+Overview of Dynamic Programming (DP)
+Dynamic programming is a technique for solving problems by breaking them down into overlapping subproblems, solving each subproblem once, and storing the solution to avoid redundant work.
+
+There are two main ways to approach DP:
+
+Memoization (Top-Down): Start with the problem as a whole and break it down, storing intermediate results.
+Tabulation (Bottom-Up): Solve all subproblems in order and use these to build up to the solution.
+Key Concepts of DP
+Optimal Substructure: The problem can be broken down into subproblems that are easier to solve.
+Overlapping Subproblems: The same subproblems recur multiple times.
+Memoization (Top-Down Approach)
+Memoization is the process of storing solutions to subproblems in a data structure, typically an object or array, so you can retrieve them without recalculating.
+
+Steps to Convert Recursive Solution to Memoized
+Identify subproblems that repeat.
+Use a data structure (like an object or array) to store results of subproblems.
+Before computing the result of a subproblem, check if it has been computed before. If yes, return the stored result.
+Recognizing Memoized Programs
+If you see a program with a recursive function that checks a storage (like a memo array or object) for a previously computed result, it's likely memoized.
+
+Example Problems
+Let's look at common dynamic programming problems and see how they can be solved using recursive, memoized, and dynamic programming approaches.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+imp things:
+recompute the same values multiple times,=>
+fibonaci(5) me 
+=> First call: fibonacci(5) calls fibonacci(4) and fibonacci(3)
+=> Second call: fibonacci(4) calls fibonacci(3) and fibonacci(2).
+--> But notice that fibonacci(3) is already being called in the first call, so this value is recalculated again.
+=> Third call: fibonacci(3) calls fibonacci(2) and fibonacci(1), but fibonacci(2) has already been calculated in the second call, so it will be recalculated again.
+
+
+
+
+
+
+function fibonacci(n, memo = {}) {
+    if (n <= 1) {
+        return n;
+    }
+    if (!(n in memo)) {
+        memo[n] = fibonacci(n - 1, memo) + fibonacci(n - 2, memo);
+    }
+    return memo[n];
+}
+
+
+
+
+
+
+
+
+
+

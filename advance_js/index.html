@@ -1,0 +1,549 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Advance Js</title>
+    <style>
+        * {
+            margin: 0%;
+            padding: 0%;
+            box-sizing: border-box;
+        }
+
+        body {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            padding: 30px;
+            border: 2px solid red;
+        }
+
+        code {
+            width: 100%;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            background-color: rgb(241, 243, 245);
+            color: black;
+            padding: 10px;
+            margin-top: 5px;
+        }
+
+        code>mark,
+        code>b>mark {
+            background-color: rgb(255, 51, 0);
+            color: white;
+            display: inline;
+        }
+    </style>
+</head>
+
+<body>
+    <h1>Execution Context</h1>
+    <p>
+        It is just an evnironment in which code execute.
+        <b>Each Execution context has its own global context (by default).</b>
+    </p>
+    <code>
+        e.g:- <br>
+        var name="hamza"<br>
+        console.log(name)<br>
+        but <br>
+        console.log(window.name)// also print hamza
+    </code>
+    <br>
+    <h2> Execution context has three properties</h2>
+    <ul>
+        <li>Variable objects</li>
+        <li>scope chain</li>
+        <li><q>this</q> variable
+        </li>
+    </ul>
+    <br>
+    <h2> Execution context object has two phases</h2>
+    <p>
+        <mark><b>Creation phase</b></mark>
+    <ol>
+        <li>
+            Variable objects are created:-
+            <ul>
+                <li>for each function a property is created in the variable object which is
+                    <b>pointing to that funtion</b>
+                </li>
+                <li>for each variable a property is created in the variable object which is
+                    <b>then set to undefined</b>
+                </li>
+                <li><b>argument objects</b> are created that were passed into the fucntion
+                </li>
+                <br>
+                <li>
+                    <b>line 1 and line 2 is called <mark>Hoisting</mark> in JS.</b>
+                    it is a mechanism where variables and functions declearations are moved to the top of their scope
+                    before the code execution. <mark>(creation phase me jitny bhi variables or functions hen onko onke
+                        related scope me top pr move krdia jata hai )</mark>
+                    <br>
+                    <b>(Hoisting is always related to decleration)</b>
+                    <br>
+                    <b>(Hoisting works with var and function (not with let const))</b>
+                </li>
+                <h4>
+                    Function Hoisting:
+                </h4>
+                <ul>
+                    <li>
+                        <code>
+                            <b>Hoisting (Function is getting called before declaration)</b>
+                            <br>
+                            <mark>
+                                sum(4, 5)</mark> <br>
+                            function sum(a, b) {<br>
+                                add = a + b <br>
+                                console.log(add); <br>
+                            }
+                        </code>
+                        <br>
+                        <b>Error phase</b>
+                        <code>
+                            <br>
+                            <mark>
+                                sum(4, 5)</mark> <br>
+                            const sum=(a, b)=> {<br>
+                                add = a + b <br>
+                                console.log(add); <br>
+                            }
+                        </code>
+                        <p>error occured because (const sum ) is a variable so following hoisting rule it will be
+                            declared at the start as const sum=refrence error (Cannot access 'sum' before
+                            initialization)</p>
+                    </li>
+                </ul>
+                <br>
+                <h4>
+                    Variable Hoisting:
+                </h4>
+                <ul>
+                    <li>
+                        <code>
+                            <b>Hoisting (Function is getting called before declaration)</b>
+                            <br>
+                            <mark>
+                               console.log(a) // undefined</mark> <br>
+                            var a=12;
+                            console.log(a) // 12 //cz already intialize
+                            var a=20;
+                        </code>
+                        <br>
+                    </li>
+                </ul>
+            </ul>
+
+        </li>
+        <br><br>
+        <li>Scope chains are created.
+            <br>
+            <ul>
+                <li>The <b>scope chain</b> is used to resolve the value of variable names in javascript.</li>
+                <li>Scope chain in javascript is <b> lexically defined,</b> which means that we can see what the scope
+                    chain
+                    will be by lookin at the code.</li>
+                <li>At the top of the scope chain is the <b>global scope, </b> which is the window object in the
+                    browser. </li>
+                <br>
+                <li>
+                    <b>Lexical scoping:</b>a function that is lexically within another function get access to the scope
+                    of the function. (inner function can get access to their parent function variables but the
+                    vice-versa in not true.)
+                    <ul>
+                        <li>
+                            <br>
+                            <code>
+                                function first() { <br>
+                                    var b = "how are you buddy?"<br>
+                                    <mark >second()</mark> <br>
+                        <br>
+                                    function second() { <br>
+                                        var c = "i am your instructor!" <br>
+                                        console.log(a + b + c); <br>
+                                        // now if call 3rd function here. <b><mark>three()</mark> </b> <br>
+                                    } <br>
+                                }
+                                <br>
+                                <br>
+                                function three(){<br>
+                                    var d="have you learened enough?"<br>
+                                    console.log(a+b+c+d) <br>
+                                }
+                                <br>
+                                <mark> first()</mark>
+                               
+                            </code>
+                        </li>
+                    </ul>
+                </li>
+            </ul>
+        </li>
+        <br><br>
+        <li>this variable
+            <br>
+            <ul>
+                <li>The JS <q><b>this</b></q> keyword refer to the object it belongs to.</li>
+                <li>It has different value depending on where it is used.</li>
+                <li>Alone this refer to the global object.</li>
+                <li>In regular function, this refers to the global object.</li>
+                <li>In a function, within strict mode <q><b>this</b></q> is undefined</li>
+                <li>
+                    <code>
+                        console.log(this)// refer to window <br>
+                        <br>
+                        function sum(){ <br>
+                            var add=2+2 <br>
+                            console.log("sum of the two no. is",add) <br>
+                            console.log(this)// again represent window object  <br>
+                        } <br>
+                        sum()
+
+                        <br><br>
+                        const sum={ <br>
+                           name:"hamza qureshi",<br>
+                           expertise:"full stack dev",
+                           sum:function(){
+                            var add=2+2 <br>
+                            console.log("sum of the two no. is",add) <br>
+                            console.log(this.name)// <b><mark>
+                               (hamza) now it refer to the object not the global object
+                            </mark></b> <br>
+                           }
+                        } <br>
+                        sum() <br> <br>
+                        <b>Exercise</b>
+                        const sum={ <br>
+                            name:"hamza qureshi",<br>
+                            expertise:"full stack dev",
+                            sum:function(){
+                             var add=2+2 <br>
+                             console.log("sum of the two no. is",add) <br>
+                             console.log(this.name)// <b><mark>
+                                (hamza) now it refer to the object not the global object
+                             </mark></b> <br>
+                             <br>
+                             function child(){
+                                var name="hey";
+                                console.log(name);
+                                console.log(this)//<b><mark>
+                                    (window) cz above mention rule no. 4 (In regular function, this refers to the global object.) khin pr bhi kro chahy ksi method ke andr hi krdo lkn ye window ko hi refer kre ga
+                                 </mark></b>
+                             }
+                              <br>
+                            }
+                         } <br>
+                    </code>
+                </li>
+            </ul>
+        </li>
+    </ol>
+    <mark> <b>Execution phase</b></mark>
+    <ol>
+        <li>current execution context run line by line.</li>
+    </ol>
+    </p>
+
+    <h1>Execution Stack</h1>
+    <p>It is also called calling stack. it follows LIFO. <b>
+            it is used to store execution context create during the code execution.
+        </b></p>
+    <code>
+        var g = "hamza qureshi";<br>
+        function a() {
+            var fa = "function a";
+            console.log(fa);
+            debugger
+            b()
+            console.log('lets see when i will be on console.');
+        }
+        <br>
+        function b() {
+            debugger
+            console.log('inside 2nd function');
+            c();
+        }<br>
+        function c() {
+            debugger
+            console.log('inside 3rd function');
+        }<br>
+        // debugger<br>
+        // a()
+    </code>
+
+    <h1><q>Use Strict in JS</q></h1>
+    <ol>
+        <li>
+            it was new feature of ECMAScript 5.
+        </li>
+        <li>The statement <b><q>use strict;</q></b> instructs the browsers to use the strict mode, which is a reduced
+            and safer
+            feature set of javascript</li>
+        <li><b>Features:</b>
+            <ul>
+                <li>Disallow global variable (catches missing var declarations and typos in varable name)</li>
+                <li>function parameter names must be unique(function sum(x,x){}) not allowed!</li>
+            </ul>
+        </li>
+        <li>
+            <b>Example</b>
+            <ul>
+                <li>
+                    <b>Problem( in function add is not decalred)</b>
+                    <p>
+                        <mark>
+                            agr simple asy hi run kro ge to output dede ga agr top me "use strict" likh doge to error
+                            dega ke add is not defined
+                        </mark>
+                    </p>
+
+                    <code>
+                            sum(4, 5) <br>
+
+function sum(a, b) { <br>
+add = a + b <br>
+console.log(add); <br>
+}
+                        </code>
+                </li>
+            </ul>
+        </li>
+    </ol>
+
+    <h1><q>Types in JavaScript</q></h1>
+    <ol>
+        <li><b>Premitive data types</b>
+            <br>
+            <ul>
+                <li>Number</li>
+                <li>String</li>
+                <li>Boolean</li>
+                <li>undefined</li>
+                <li>Null <b>(null ki data type hmesha object hi dikhy gi) <mark>e.g:- let a=null; typeof a //
+                            object</mark></b> JS creator <b>(Brendan Eich)</b> said sorry that it was their mistake
+                    while creating js</li>
+                <li>Symbol</li>
+            </ul>
+        </li>
+        <br>
+        <li><b>Non-Premitive data types (reference data types cz they have reference not the actual value)</b> <br>
+            <ul>
+                <li>Object (In javascript everything is an object either array function dates)
+                    <br>
+                    <b>Example</b>
+                    <br>
+                    <code>
+                        console.log(typeof( {} ))// object <br>
+                        console.log(typeof( [] ))// object <br>
+                        console.log(typeof( function() {} ))// function <br> 
+                        <br>
+                        <b>But we have learend everything except premitive data types in js are objects. Lets prove</b>
+                        <br>
+                        const check=()=>{ <br>
+                            console.log('hamza')
+                        }
+                        // but now see we can add data into this function
+                        <br>
+                        check.newdata="hello this is new data";
+                        console.log(check.newdata) <br>
+                        console.log(check())// it will show hamza
+                    </code>
+                </li>
+            </ul>
+        </li>
+    </ol>
+
+    <h1><q>Pass By Value Vs Pass By Reference</q></h1>
+    <ol>
+        <li>
+            <b>Pass by value</b>
+            <br>
+            <code>
+                let a=5;
+                let b=a;
+
+                console.log(a)
+                console.log(b)
+                <b><mark>
+                    // isme premitive values hoti hen or copy bhi primitive values hi hoti hen
+                </mark></b>
+            </code>
+        <li>
+            <b>Pass by Reference</b>
+            <br>
+            <code>
+               const obj={
+                name:"hamza",
+                pass:"hamza123"
+               } <br>
+               const obj2=obj <br>
+
+                console.log(obj) <br>
+                console.log(obj2) <br>
+<mark>// lekin obj2 ka data change krny se obj ka bhi change hojay ga Reason:- work on pass by reference if main reference change the real obj data is also change(obj2 ko obj ki memory ka ref dia gya) same thing happend with arrays create copy and push the value in array2 then it also change the array1</mark>  
+obj2.pass="chnage123" <br>
+console.log(obj) <br>
+                console.log(obj2) <br>
+                <br>
+                <b>Example</b>
+                let count=120; <br>
+                const person={
+                    name:"hamza",
+                    age:24,
+                } <br>
+                const hamza=(a,b)=>{
+                    a=234;
+                    b.age=36
+                } <br>
+                hamza(count,person) <br>
+                console.log(count) <br>
+                console.log(person.age) <br>
+                <mark>What would be the output of the age?</mark>
+            </code>
+        </li>
+        </li>
+    </ol>
+
+    <div class="mainDiv">
+        <div class="centerDiv">
+            <h1>Welcome to typing speed test</h1>
+            <h2 id="msg"></h2>
+            <br>
+            <textarea  id="mywords" cols="30" rows="10" placeholder="Start the test..."></textarea>
+            <button id="btn" class="mainbtn">Start</button>
+        </div>
+    </div>
+
+
+    <script>
+        "use strict"
+        // let add = 23 + 34
+        // console.log(add)
+        // "use strict"
+        // var g = "hamza qureshi";
+        // function a() {
+        //     var fa = "function a";
+        //     console.log(fa);
+        //     debugger
+        //     b()
+        //     console.log('lets see when i will be on console.');
+        // }
+        // function b() {
+        //     debugger
+        //     console.log('inside 2nd function');
+        //     c();
+        // }
+        // function c() {
+        //     debugger
+        //     console.log('inside 3rd function');
+        // }
+        // debugger
+        // a()
+        // <! --
+        // hoisting
+        // sum(4, 5)
+        // const sum = (a, b) => {
+        //     add = a + b
+        //     console.log(add);
+        // }
+
+        // console.log(value);
+        //     var value = 23
+        //     console.log(value);
+        //     var value = 24
+
+        //     var a = "hamza qureshi.."
+        //     function first() {
+        //         var b = "how are you buddy?"
+        //         second()
+
+        //         function second() {
+        //             var c = "i am your instructor!"
+        //             console.log(a + b + c);
+        //         }
+        //     }
+        //     first()
+
+        let setOfWords = [
+            "my name is hamza qureshi",
+            "and i am the full stack web and app developere",
+            "and currently learning devops"
+        ]
+
+        // access
+        const msg = document.getElementById('msg')
+        const typedWords = document.getElementById('mywords')
+        const btn = document.getElementById('btn')
+        let startTime, endTime;
+
+        const playGames = () => {
+            let randomNumber = Math.floor(Math.random() * setOfWords.length)
+            msg.innerText = setOfWords[randomNumber]
+            // start time
+
+            let date = new Date()
+            startTime = date.getTime()
+            btn.innerText = "Done"
+        }
+
+        const endPlay = () => {
+            let date = new Date()
+            endTime = date.getTime()
+            let totalTime = ((endTime - startTime) / 1000)
+            console.log(totalTime);
+
+            // logic
+            let totalStr = typedWords.value;
+            let wordCount = wordCounter(totalStr)
+
+            let speed = Math.round((wordCount / totalTime) * 60)
+            let finalMsg = `you typed total at ${speed} words per minutes. `
+
+            // check correct or wrong words
+            finalMsg += comparedWords(msg.innerText, totalStr)
+            msg.innerText = finalMsg
+
+        }
+
+        const comparedWords = (str1, str2) => {
+            let word1 = str1.split(" ")
+            let word2 = str2.split(" ")
+
+            let cnt = 0
+            word1.forEach((item, index) => {
+                if (item == word2[index]) {
+                    cnt++
+                }
+            })
+
+            let errorWords = (word1.length - cnt)
+            return (cnt+" correct out of "+ word1.length+ " words and the total number of errors are "+ errorWords + ".")
+        }
+
+        const wordCounter = (str) => {
+            let response = str.split(" ").length
+            return response
+        }
+
+        btn.addEventListener('click', () => {
+            // this means btn scope
+            console.log('comming',btn.textContent);
+            if (btn.textContent == 'Start') {
+                typedWords.disabled = false;
+                playGames()
+            } else if (btn.textContent == "Done") {
+                typedWords.disabled = true;
+                btn.innerText = "Start";
+                endPlay()
+            }
+        })
+
+    </script>
+</body>
+
+</html>
